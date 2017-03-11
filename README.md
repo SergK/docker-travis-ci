@@ -12,13 +12,19 @@ Originaly idea is to use them for ansible role testing, e.g. using [molecule](ht
     $ cat molecule.yml
     docker:
       containers:
-        ...
+        - name: ansible-dockerswarm-01
+          ansible_groups:
+            - docker_engine
+            - docker_swarm_manager
+          image: sergk/docker-travis-ci
+          image_version: ubuntu16.04-latest
+          privileged: True
         - name: ansible-dockerswarm-02
           ansible_groups:
             - docker_engine
             - docker_swarm_manager
-          image: sergk/centos7-systemd
-          image_version: latest
+          image: sergk/docker-travis-ci
+          image_version: centos7-latest
           privileged: True
           volume_mounts:
             - '/sys/fs/cgroup:/sys/fs/cgroup:ro'
@@ -27,8 +33,8 @@ Originaly idea is to use them for ansible role testing, e.g. using [molecule](ht
           ansible_groups:
             - docker_engine
             - docker_swarm_worker
-          image: sergk/centos7-systemd
-          image_version: latest
+          image: sergk/docker-travis-ci
+          image_version: centos7-latest
           privileged: True
           volume_mounts:
             - '/sys/fs/cgroup:/sys/fs/cgroup:ro'
