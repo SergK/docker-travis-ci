@@ -10,3 +10,5 @@ RUN apt-get update && \
     iproute2 && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
+
+CMD ["/sbin/init"]
